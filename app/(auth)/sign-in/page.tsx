@@ -1,6 +1,8 @@
+import SignIn from "@/components/auth/SignIn"
+
 const SignInPage = () => {
   return (
-    <div className=''>SignInPage</div>
+    <SignIn />
   )
 }
 

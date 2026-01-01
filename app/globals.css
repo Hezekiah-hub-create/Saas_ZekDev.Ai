@@ -115,6 +115,17 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@layer components {
+  .auth-layout {
+    @apply flex flex-col items-center justify-center min-h-screen gap-8 p-4 md:p-12 bg-slate-50 dark:bg-slate-900;
+  }
+}
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;
