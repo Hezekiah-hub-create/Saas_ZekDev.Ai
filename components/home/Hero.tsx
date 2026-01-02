@@ -37,7 +37,7 @@ const FloatingSymbol = ({
 
 const Hero = ({ user }: { user: User | null }) => {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-900 min-h-screen flex flex-col items-center justify-center">
+    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-background min-h-screen flex flex-col items-center justify-center">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Floating Language Symbols */}
@@ -55,7 +55,7 @@ const Hero = ({ user }: { user: User | null }) => {
             x: [0, 50, -30, 0],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-[20%] -left-[10%] w-150 h-150 bg-amber-300/20 dark:bg-amber-600/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
+          className="absolute -top-[20%] -left-[10%] w-150 h-150 bg-primary rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
         />
 
         <motion.div
@@ -70,7 +70,7 @@ const Hero = ({ user }: { user: User | null }) => {
             ease: "easeInOut",
             delay: 1,
           }}
-          className="absolute top-[20%] -right-[10%] w-125 h-125 bg-orange-300/20 dark:bg-orange-600/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
+          className="absolute top-[20%] -right-[10%] w-125 h-125 bg-primary rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
         />
       </div>
 
@@ -83,18 +83,18 @@ const Hero = ({ user }: { user: User | null }) => {
           <motion.span
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="inline-block py-1 px-3 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-300 text-sm font-semibold mb-6 tracking-wide uppercase border border-amber-200 dark:border-amber-800"
+            className="inline-block py-1 px-3 rounded-full bg-primary text-primary-foreground text-sm font-semibold mb-6 tracking-wide uppercase border border-primary"
           >
             AI-Powered Learning
           </motion.span>
-          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
+          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-foreground mb-6">
             Unlock a New Language with <br className="hidden lg:block" />
             <span className="relative inline-block">
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-500 to-orange-600 dark:from-amber-400 dark:to-orange-500">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-accent to-primary dark:from-accent dark:to-primary">
                 Your Personal AI Tutor
               </span>
               <motion.span
-                className="absolute -inset-1 rounded-lg bg-linear-to-r from-amber-400/20 to-orange-500/20 blur-lg"
+                className="absolute -inset-1 rounded-lg bg-linear-to-r from-accent/20 to-primary/20 blur-lg"
                 animate={{ opacity: [0.5, 0.8, 0.5] }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
@@ -106,7 +106,7 @@ const Hero = ({ user }: { user: User | null }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="mt-6 max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300 leading-relaxed"
+          className="mt-6 max-w-2xl mx-auto text-xl text-muted-foreground leading-relaxed"
         >
           Generate custom lessons and practice conversations in real-time.
           Learning a language has never been this personal, effective, or
@@ -125,17 +125,17 @@ const Hero = ({ user }: { user: User | null }) => {
             whileTap={{ scale: 0.95 }}
             animate={{
               boxShadow: [
-                "0px 10px 30px -10px rgba(217, 119, 6, 0.4)",
-                "0px 10px 40px -5px rgba(217, 119, 6, 0.6)",
-                "0px 10px 30px -10px rgba(217, 119, 6, 0.4)",
+                "0px 10px 30px -10px hsl(var(--primary) / 0.4)",
+                "0px 10px 40px -5px hsl(var(--primary) / 0.6)",
+                "0px 10px 30px -10px hsl(var(--primary) / 0.4)",
               ],
             }}
             transition={{ boxShadow: { duration: 2, repeat: Infinity } }}
-            className="inline-block px-8 py-4 text-lg font-bold text-white bg-amber-600 hover:bg-amber-700 rounded-lg shadow-xl"
+            className="inline-block px-8 py-4 text-lg font-bold text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg shadow-2xl"
           >
             Start Learning for Free
           </motion.a>
-          <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-4 text-sm text-muted-foreground">
             No credit card required · Instant access
           </p>
         </motion.div>

@@ -41,6 +41,7 @@ export interface User {
   image: string;
   checkoutId?: string | null;
   isPro?: boolean;
+  polarCustomerId?: string | null;
 }
 
 export interface lessongeneratorParams {

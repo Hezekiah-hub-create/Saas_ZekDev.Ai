@@ -19,7 +19,7 @@ const Authlayout = async ({children}: {children:React.ReactNode}) => {
             height={40} 
             className="rounded-full"
             />
-           AI POWERED SaaS PLATFORM
+           Cognivox AI
         </Link>
         {children}
     </div>

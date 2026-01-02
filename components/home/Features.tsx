@@ -9,7 +9,7 @@ const Features = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Why LinguaLeap AI?
+            Why Cognivox AI?
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-500 dark:text-slate-400">
             Go beyond flashcards and textbooks with a truly interactive learning

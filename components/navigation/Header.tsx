@@ -52,9 +52,9 @@ const Header = ({ user }: { user: User | null }) => {
             className="flex items-center space-x-3"
             aria-label="Go to homepage"
           >
-            <Image src="/ai_icon.png" alt="logo" height={60} width={60} className="rounded-full"/>
+            <Image src="/ai_icon.png" alt="logo" height={40} width={40} className="rounded-full ai-float"/>
             <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-              AI SaaS
+              Cognivox AI
             </h1>
           </Link>
           <div className="flex items-center gap-2">

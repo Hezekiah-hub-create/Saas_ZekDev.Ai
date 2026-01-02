@@ -1,34 +1,40 @@
-import { Check, Zap, Users, BookOpen, Target, Award } from "lucide-react";
+import { Language, Proficiency } from "@/types";
+import Chat from "@/constants/icons/Chat";
+import Globe from "@/constants/icons/Globe";
+import Lession from "@/constants/icons/Lession";
+
+export const LANGUAGES: Language[] = [
+  { code: "es", name: "Spanish", pro: false },
+  { code: "fr", name: "French", pro: false },
+  { code: "de", name: "German", pro: false },
+  { code: "it", name: "Italian", pro: true },
+  { code: "pt", name: "Portuguese", pro: true },
+  { code: "ja", name: "Japanese", pro: true },
+  { code: "ko", name: "Korean", pro: true },
+  { code: "zh", name: "Mandarin Chinese", pro: true },
+];
 
 export const features = [
   {
-    icon: Zap,
-    title: "AI-Powered Learning",
-    desc: "Experience personalized lessons tailored to your learning style and pace.",
+    icon: Lession,
+    title: "Tailored Lesson Plans",
+    desc: "Generate lessons on any topic you choose, perfectly matched to your proficiency level from beginner to fluent.",
   },
   {
-    icon: Users,
-    title: "Interactive Conversations",
-    desc: "Engage in real-time conversations with AI tutors for immersive language practice.",
+    icon: Chat,
+    title: "Real-World Practice",
+    desc: "Chat with an advanced AI tutor that provides instant feedback, corrections, and encouragement.",
   },
   {
-    icon: BookOpen,
-    title: "Comprehensive Curriculum",
-    desc: "Access structured lessons covering grammar, vocabulary, and cultural insights.",
+    icon: Globe,
+    title: "Explore Languages",
+    desc: "Start your journey in Spanish, French, German, and many more. New languages are added regularly.",
   },
-  {
-    icon: Target,
-    title: "Progress Tracking",
-    desc: "Monitor your improvement with detailed analytics and achievement milestones.",
-  },
-  {
-    icon: Award,
-    title: "Certification Ready",
-    desc: "Prepare for language proficiency exams with targeted practice modules.",
-  },
-  {
-    icon: Check,
-    title: "Flexible Learning",
-    desc: "Learn anytime, anywhere with our mobile-friendly platform.",
-  },
+];
+
+export const PROFICIENCY_LEVELS: Proficiency[] = [
+  Proficiency.Beginner,
+  Proficiency.Intermediate,
+  Proficiency.Advanced,
+  Proficiency.Fluent,
 ];

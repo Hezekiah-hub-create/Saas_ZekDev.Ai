@@ -22,7 +22,7 @@ export async function Checkout({
 }) {
   const result = await polar.checkouts.create({
     products: [process.env.POLAR_PRODUCT_ID!],
-    successUrl: `${process.env.NEXT_PUBLIC_URL}/dashboard`,
+    successUrl: `${process.env.POLAR_SUCCESS_URL}/dashboard`,
     externalCustomerId,
     customerEmail: customerEmail || undefined,
   });

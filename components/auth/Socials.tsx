@@ -21,6 +21,7 @@ const Socials = () => {
   const isSignIn = pathname === "/sign-in";
   const router = useRouter();
   const githubProvider = new GithubAuthProvider();
+  githubProvider.addScope('user:email');
   const googleProvider = new GoogleAuthProvider();
 
   const handleLogin = async ({
@@ -29,41 +30,63 @@ const Socials = () => {
     provider: GithubAuthProvider | GoogleAuthProvider;
   }) => {
     setPending(true);
-    await signInWithPopup(auth, provider)
-      .then(async () => {
-        const response = await saveUser({
-          id: auth.currentUser!.uid,
-          name:
-            auth.currentUser!.displayName ||
-            auth.currentUser!.email!.split("@")[0],
-          email: auth.currentUser!.email!,
-          image: auth.currentUser!.photoURL || "",
-          isPro: false,
-          checkoutId: null,
-        });
-        if (!response.success) {
-          toast.error("Failed to save user to database.");
-          setPending(false);
-          return;
+    try {
+      const result = await signInWithPopup(auth, provider);
+      let userEmail = result.user.email;
+
+      // If email is not available (e.g., GitHub private email), fetch from provider
+      if (!userEmail) {
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        if (credential?.accessToken) {
+          const response = await fetch('https://api.github.com/user/emails', {
+            headers: {
+              Authorization: `token ${credential.accessToken}`,
+            },
+          });
+          const emails = await response.json();
+          const primaryEmail = emails.find((email: any) => email.primary && email.verified);
+          userEmail = primaryEmail?.email;
         }
-        await storeUser({
-          id: auth.currentUser!.uid,
-          name:
-            auth.currentUser!.displayName ||
-            auth.currentUser!.email!.split("@")[0],
-          email: auth.currentUser!.email!,
-          image: auth.currentUser!.photoURL || "",
-          isPro: false,
-          checkoutId: null,
-        });
-        toast.success("Successfully signed!");
-        router.push("/dashboard");
+      }
+
+      if (!userEmail) {
+        toast.error("Email is required for account creation. Please ensure your GitHub account has a public email or use Google login.");
         setPending(false);
-      })
-      .catch((error) => {
-        toast.error(`Error signing in with Github: ${error.message}`);
-        setPending(false);
+        return;
+      }
+
+      const response = await saveUser({
+        id: result.user.uid,
+        name:
+          result.user.displayName ||
+          userEmail.split("@")[0],
+        email: userEmail,
+        image: result.user.photoURL || "",
+        isPro: false,
+        checkoutId: null,
       });
+      if (!response.success) {
+        toast.error("Failed to save user to database.");
+        setPending(false);
+        return;
+      }
+      await storeUser({
+        id: result.user.uid,
+        name:
+          result.user.displayName ||
+          userEmail.split("@")[0],
+        email: userEmail,
+        image: result.user.photoURL || "",
+        isPro: false,
+        checkoutId: null,
+      });
+      toast.success("Successfully signed!");
+      router.push("/dashboard");
+    } catch (error: any) {
+      toast.error(`Error signing in: ${error.message}`);
+    } finally {
+      setPending(false);
+    }
   };
 
   return (

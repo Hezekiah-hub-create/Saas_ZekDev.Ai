@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Check } from "@/constants/icons/Check";
+import Check from "@/constants/icons/Check";
 import { db } from "@/services/firebase";
 import { Checkout } from "@/services/polar";
 import { User } from "@/types";
@@ -86,14 +86,14 @@ const Pricing = ({ user }: { user: User | null }) => {
   return (
     <section
       ref={sectionRef}
-      className="py-20 lg:py-24 bg-linear-to-br from-amber-50 to-white dark:from-amber-900/20 dark:to-slate-800/50"
+      className="py-20 lg:py-24 ai-gradient"
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground">
             Simple, Transparent Pricing
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-500 dark:text-slate-400">
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Invest in your skills with a plan that fits your goals.
           </p>
         </div>
@@ -102,32 +102,32 @@ const Pricing = ({ user }: { user: User | null }) => {
           {/* Starter Plan */}
           <motion.div
             whileHover={{ scale: 1.03 }}
-            className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col"
+            className="bg-card p-8 rounded-2xl shadow-sm border border-border flex flex-col"
           >
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+            <h3 className="text-xl font-semibold text-foreground">
               Starter
             </h3>
             <div className="my-4 flex items-baseline">
-              <span className="text-4xl font-extrabold text-slate-900 dark:text-white">
+              <span className="text-4xl font-extrabold text-foreground">
                 $<PriceCounter value={0} />
               </span>
-              <span className="text-slate-500 ml-1">/mo</span>
+              <span className="text-muted-foreground ml-1">/mo</span>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 mb-6">
+            <p className="text-muted-foreground mb-6">
               Perfect for trying out the platform.
             </p>
             <ul className="space-y-4 mb-8 flex-1">
-              <li className="flex items-center text-slate-600 dark:text-slate-300">
+              <li className="flex items-center text-muted-foreground">
                 <Check />3 AI Lessons per day
               </li>
-              <li className="flex items-center text-slate-600 dark:text-slate-300">
+              <li className="flex items-center text-muted-foreground">
                 <Check />
                 Basic Conversations
               </li>
             </ul>
             <Link
               href={user ? "/dashboard" : "/sign-in"}
-              className="w-full block text-center py-3 px-4 border border-amber-600 text-amber-600 rounded-lg font-semibold hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors"
+              className="w-full block text-center py-3 px-4 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/10 transition-colors"
             >
               Get Started
             </Link>
@@ -137,33 +137,33 @@ const Pricing = ({ user }: { user: User | null }) => {
           <motion.div
             initial={{ y: 0 }}
             whileHover={{ scale: 1.05, y: -10 }}
-            className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border-2 border-amber-500 relative flex flex-col"
+            className="bg-card p-8 rounded-2xl shadow-xl border-2 border-primary relative flex flex-col"
           >
-            <div className="absolute top-0 right-0 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
+            <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
               MOST POPULAR
             </div>
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+            <h3 className="text-xl font-semibold text-foreground">
               Learner
             </h3>
             <div className="my-4 flex items-baseline">
-              <span className="text-4xl font-extrabold text-slate-900 dark:text-white">
+              <span className="text-4xl font-extrabold text-foreground">
                 $<PriceCounter value={29} />
               </span>
-              <span className="text-slate-500 ml-1">/mo</span>
+              <span className="text-muted-foreground ml-1">/mo</span>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 mb-6">
+            <p className="text-muted-foreground mb-6">
               For serious language enthusiasts.
             </p>
             <ul className="space-y-4 mb-8 flex-1">
-              <li className="flex items-center text-slate-600 dark:text-slate-300">
+              <li className="flex items-center text-muted-foreground">
                 <Check />
                 Unlimited AI Lessons
               </li>
-              <li className="flex items-center text-slate-600 dark:text-slate-300">
+              <li className="flex items-center text-muted-foreground">
                 <Check />
                 Advanced Voice Mode
               </li>
-              <li className="flex items-center text-slate-600 dark:text-slate-300">
+              <li className="flex items-center text-muted-foreground">
                 <Check />
                 Priority Support
               </li>
@@ -174,37 +174,37 @@ const Pricing = ({ user }: { user: User | null }) => {
           {/* Team/Polyglot Plan */}
           <motion.div
             whileHover={{ scale: 1.03 }}
-            className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col"
+            className="bg-card p-8 rounded-2xl shadow-sm border border-border flex flex-col"
           >
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+            <h3 className="text-xl font-semibold text-foreground">
               Polyglot
             </h3>
             <div className="my-4 flex items-baseline">
-              <span className="text-4xl font-extrabold text-slate-900 dark:text-white">
+              <span className="text-4xl font-extrabold text-foreground">
                 $<PriceCounter value={49} />
               </span>
-              <span className="text-slate-500 ml-1">/year</span>
+              <span className="text-muted-foreground ml-1">/year</span>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 mb-6">
+            <p className="text-muted-foreground mb-6">
               Best value for long-term learners.
             </p>
             <ul className="space-y-4 mb-8 flex-1">
-              <li className="flex items-center text-slate-600 dark:text-slate-300">
+              <li className="flex items-center text-muted-foreground">
                 <Check />
                 All Learner Features
               </li>
-              <li className="flex items-center text-slate-600 dark:text-slate-300">
+              <li className="flex items-center text-muted-foreground">
                 <Check />
                 Multi-language Path
               </li>
-              <li className="flex items-center text-slate-600 dark:text-slate-300">
+              <li className="flex items-center text-muted-foreground">
                 <Check />
                 Downloadable Content
               </li>
             </ul>
             <a
               href="/"
-              className="w-full block text-center py-3 px-4 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 rounded-lg font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              className="w-full block text-center py-3 px-4 border border-border text-foreground rounded-lg font-semibold hover:bg-muted transition-colors"
             >
               Contact Sales
             </a>
