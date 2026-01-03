@@ -1,3 +1,0 @@
-- [x] Add framer-motion animations to CTA button (pulsing glow, scale effects)
-- [x] Incorporate AI icon into CTA component
-- [x] Test animations in browser

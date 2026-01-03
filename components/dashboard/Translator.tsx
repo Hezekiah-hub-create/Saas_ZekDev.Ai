@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { LANGUAGES } from "@/constants/constants";
 import { translatorParams, User } from "@/types";
-import { translatorTrigger } from "@/services/inngestTrigger";
+import { translatorTrigger } from "@/services/inngestTriggers";
 import {
   collection,
   onSnapshot,
@@ -42,7 +42,7 @@ export const Translator: React.FC<TranslatorProps> = ({
   );
   const [error, setError] = useState<string | null>(null);
   const [currentIndex, setCurrentInex] = useState(0);
-  const { speak, isSpeaking, isSupported } = useTextToSpeech();
+  const { speak, pause, resume, cancel, restart, isSpeaking, isPaused, isSupported, hasCurrentUtterance } = useTextToSpeech();
 
   const language = LANGUAGES.find(
     (language) => language.name === selectedLanguage
@@ -105,7 +105,7 @@ export const Translator: React.FC<TranslatorProps> = ({
       (snapshot) => {
         setTranslations(
           snapshot.docs.map((doc) => ({
-            text: doc.data().originalText, // Assuming 'originalText' corresponds to 'text'
+            text: doc.data().text,
             translatedText: doc.data().translatedText,
             sourceLangName: doc.data().sourceLangName,
             targetLangName: doc.data().targetLangName,
@@ -156,8 +156,8 @@ export const Translator: React.FC<TranslatorProps> = ({
         />
       </div>
 
-      <Button onClick={handleTranslate} disabled={!sourceText.trim()}>
-        Translate
+      <Button onClick={handleTranslate} disabled={!sourceText.trim() || pending}>
+        {pending ? <LoadingSpinner /> : "Translate"}
       </Button>
 
       {error && (
@@ -210,15 +210,49 @@ export const Translator: React.FC<TranslatorProps> = ({
                   {translations[currentIndex].sourceLangName} →{" "}
                   {translations[currentIndex].targetLangName}
                 </div>
-                <SpeakerIcon
-                  onClick={() =>
-                    speak(
-                      translations[currentIndex].translatedText || "",
-                      targetLangCode!
-                    )
-                  }
-                  disabled={isSpeaking}
-                />
+                <div className="flex gap-1">
+                  <SpeakerIcon
+                    onClick={() =>
+                      speak(
+                        translations[currentIndex].translatedText || "",
+                        targetLangCode!
+                      )
+                    }
+                    disabled={isSpeaking}
+                  />
+                  <Button
+                    size="sm"
+                    onClick={pause}
+                    disabled={!isSpeaking || isPaused}
+                    className="px-2 py-1 text-xs"
+                  >
+                    Pause
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={resume}
+                    disabled={!isSpeaking || !isPaused}
+                    className="px-2 py-1 text-xs"
+                  >
+                    Continue
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={cancel}
+                    disabled={!isSpeaking}
+                    className="px-2 py-1 text-xs"
+                  >
+                    Stop
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={restart}
+                    disabled={!hasCurrentUtterance}
+                    className="px-2 py-1 text-xs"
+                  >
+                    Restart
+                  </Button>
+                </div>
               </div>
             )}
             <div className="items-center mb-2">

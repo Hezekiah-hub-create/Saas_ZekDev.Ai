@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { lessongeneratorTrigger } from "@/services/inngestTrigger";
+import { lessongeneratorTrigger } from "@/services/inngestTriggers";
 import { db } from "@/services/firebase";
 
 interface LessonGeneratorProps {
@@ -73,6 +73,15 @@ export const LessonGenerator: React.FC<LessonGeneratorProps> = ({
             topic: doc.data().topic,
           }))
         );
+        setError(null); // Clear any previous errors on successful snapshot
+      },
+      (error) => {
+        console.error("Error fetching lessons:", error);
+        if (error.code === "failed-precondition") {
+          setError("The database index is still building. Please wait a few minutes and refresh the page.");
+        } else {
+          setError("An error occurred while loading lessons. Please try again later.");
+        }
       }
     );
 

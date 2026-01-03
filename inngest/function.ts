@@ -55,7 +55,7 @@ export const translator = inngest.createFunction(
     const { userId, sourceLangName, targetLangName, text, selectedLanguage } =
       event.data as translatorParams;
 
-    const translatedText = await step.run("Save the translations", async () => {
+    const translatedText = await step.run("Translate text", async () => {
       try {
         const translatedText = await translateText(
           text,
@@ -65,16 +65,17 @@ export const translator = inngest.createFunction(
         return translatedText;
       } catch (error) {
         console.log(error);
+        return "Failed to translate. Please try again.";
       }
     });
 
-    const Saved = await step.run("Save the translations", async () => {
+    const Saved = await step.run("Save translation", async () => {
       try {
         await addDoc(collection(db, "translations"), {
           translatedText,
           sourceLangName,
           targetLangName,
-          originalText: text,
+          text: text,
           userId: userId,
           selectedLanguage: selectedLanguage,
           createdAt: Timestamp.now(),

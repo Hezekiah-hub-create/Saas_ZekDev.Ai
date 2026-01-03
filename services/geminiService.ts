@@ -3,7 +3,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { LessonPlan, Proficiency } from "@/types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 const lessonPlanSchema = {
   type: Type.OBJECT,
